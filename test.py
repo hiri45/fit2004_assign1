@@ -52,3 +52,45 @@ nums = [[3,'a'],[1,'p'],[3,'c'],[7,'f'],[5,'g'],[3,'b'],[7,'d'],[8,'w']]
 #counting_sort(nums,1)
 #print(nums)
 print(3%10)
+#results[0] += [results[0][1],results[0][0], 100-results[0][2]]
+#print(results)
+#print(100-results[0][2])
+res_len = len(results)
+for i in range(res_len):
+    results.append(results[i])
+for i in range(res_len):
+    results[i] = [results[i][1],results[i][0], 100-results[i][2]]
+print(results)
+str_exam = "BBA"
+def counting_sort_str(string):
+    length = len(string)
+    count = [0]*90
+    position = [0] * 90
+    output = [0] * length
+    for i in string:
+        count[ord(i)] += 1
+    for i in range(1,90):
+        position[i] = position[i-1] + count[i-1]
+    for i in range(length):
+        output[position[ord(string[i])]] = string[i]
+        position[ord(string[i])] += 1
+    updated_string = ''
+    for i in output:
+        updated_string+=i
+    string = updated_string
+        
+"""lists = []
+for letter in str_exam:
+    lists.append(letter)
+print(lists)
+lists[0] = "Z"
+print(lists)"""
+"""exam = ['A','B','C']
+str = ""
+for i in exam:
+    str+=i
+print(str)
+str_exam = str
+print(str_exam)"""
+now = counting_sort_str(str_exam)
+print(now)

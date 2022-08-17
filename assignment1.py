@@ -43,6 +43,19 @@ argv2:
 :Time complexity:
 :Aux space complexity:
 """
+def counting_sort_str(list):
+    count = [0] * 90
+    return "chode"
+"""
+High level description about the function and the approach you
+have undertaken.
+:Input:
+argv1:
+argv2:
+:Output, return or postcondition:
+:Time complexity:
+:Aux space complexity:
+"""
 def radix_sort(list):
     place_value = 1
     scores = []
@@ -66,3 +79,13 @@ argv2:
 :Time complexity:
 :Aux space complexity:
 """
+def analyze(results:list, roster, score):
+    res_len = len(results)
+    for i in range(res_len):
+        results.append(results[i])
+    for i in range(res_len):
+        results[i] = [results[i][1],results[i][0], 100-results[i][2]]
+    radix_sort(results)
+    top_10_matches = []
+    for i in range(0,10):
+        top_10_matches.append(results[i])
