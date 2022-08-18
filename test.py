@@ -8,7 +8,6 @@ argv2:
 :Time complexity:
 :Aux space complexity:
 """
-from re import L
 
 
 results = [['EAE', 'BCA', 85], ['EEE', 'BDB', 17], ['EAD', 'ECD', 21],
@@ -50,8 +49,8 @@ def radix_sort(list):
 #nums = [[3,'a'],[1,'p'],[3,'c'],[7,'f'],[5,'g'],[3,'b'],[7,'d'],[8,'w']]
 #print(len(nums))
 #print(nums[7])
-counting_sort(nums,1)
-print(nums)
+#counting_sort(nums,1)
+#print(nums)
 print(3%10)
 #results[0] += [results[0][1],results[0][0], 100-results[0][2]]
 #print(results)
@@ -61,19 +60,19 @@ for i in range(res_len):
     results.append(results[i])
 for i in range(res_len):
     results[i] = [results[i][1],results[i][0], 100-results[i][2]]
-radix_sort(results)
-print(results)
+#radix_sort(results)
+#print(results)
 str_exam = "BBA"
-def counting_sort_str(string):
-    length = len(string)
+def counting_sort_str(string,roster):
+    #roster = len(string)
     count = [0]*90
     position = [0] * 90
-    output = [0] * length
+    output = [0] * roster
     for i in string:
         count[ord(i)] += 1
     for i in range(1,90):
         position[i] = position[i-1] + count[i-1]
-    for i in range(length):
+    for i in range(roster):
         output[position[ord(string[i])]] = string[i]
         position[ord(string[i])] += 1
     updated_string = ''
@@ -94,8 +93,8 @@ for i in exam:
 print(str)
 str_exam = str
 print(str_exam)"""
-now = counting_sort_str(str_exam)
-print(now)
+#now = counting_sort_str(str_exam)
+#print(now)
 """def counting_sort_letters(list,place):
     length = len(list)
     count = [0]*90
@@ -117,11 +116,11 @@ print(now)
 #print(str_exam)
 #results[0][0] = counting_sort_str(results[0][0])
 #print(results)
-for i in range(len(results)):
-    results[i][0] = counting_sort_str(results[i][0])
-for i in range(len(results)):
-    results[i][1] = counting_sort_str(results[i][1])
-print(results)
+#for i in range(len(results)):
+#    results[i][0] = counting_sort_str(results[i][0])
+#for i in range(len(results)):
+#    results[i][1] = counting_sort_str(results[i][1])
+#print(results)
 length = len(results)
 top_10_matches = []
 #for i in range(length-1,length-11,-1):
@@ -133,10 +132,74 @@ else:
     while len(top_10_matches)<10:
         top_10_matches.append(results[iter])
         iter -= 1
-print(top_10_matches)
-score = 17
-searched_matches = []
+#print(top_10_matches)
+score = 21
+searched_matchess = []
 for i in range(length):
     if results[i][2] == score:
-        searched_matches.append(results[i])
-print(searched_matches)   
+        searched_matchess.append(results[i])
+iters = 0
+if len(searched_matchess) == 0:
+    while results[iters][2] < score:
+        iters += 1
+    for i in range(length):
+        if results[i][2] == results[iters][2]:
+            searched_matchess.append(results[i])
+if length//2 < 10:
+    searched_matchess.append(results)
+#print(searched_matchess)
+#top_10_matches.append(searched_matches)
+resultsss = [['AAB', 'AAB', 35], ['AAB', 'BBA', 49], ['BAB', 'BAB', 42],
+['AAA', 'AAA', 38], ['BAB', 'BAB', 36], ['BAB', 'BAB', 36],
+['ABA', 'BBA', 57], ['BBB', 'BBA', 32], ['BBA', 'BBB', 49],
+['BBA', 'ABB', 55], ['AAB', 'AAA', 58], ['ABA', 'AAA', 46],
+['ABA', 'ABB', 44], ['BBB', 'BAB', 32], ['AAA', 'AAB', 36],
+['ABA', 'BBB', 48], ['BBB', 'ABA', 33], ['AAB', 'BBA', 30],
+['ABB', 'BBB', 68], ['BAB', 'BBB', 52]]
+
+updated = []
+
+def analysis(results,score,roster):
+    reverse_result = []
+    for i in range(len(results)):
+        reverse_result.append(results[i])
+    for i in range(len(results)):
+        reverse_result[i] = [reverse_result[i][1],reverse_result[i][0],100-reverse_result[i][2]]
+    results += reverse_result
+    radix_sort(results)
+    for i in range(len(results)):
+        results[i][0] = counting_sort_str(results[i][0],roster)
+    for i in range(len(results)):
+        results[i][1] = counting_sort_str(results[i][1],roster)
+    top_10_matches = []
+    if len(results)<10:
+        top_10_matches.append(results)
+    else:
+        iter_top_10 = len(results)-1
+        while len(top_10_matches)<10:
+            top_10_matches.append(results[iter_top_10])
+            iter_top_10 -= 1
+    searched_matches = []
+    for i in range(len(results)):
+        if results[i][2] == score:
+            searched_matches.append(results[i])
+    if len(searched_matches) == 0:
+        #iters = 0
+        #while results[iters][2] < score:
+            #iters += 1
+        #for i in range(len(results)):
+            #if results[i][2] == results[iters][2]:
+                #searched_matches.append(results[i])
+        scores_greater = []
+        for i in range(len(results)):
+            if results[i][2] > score:
+                scores_greater.append(results[i])
+        for i in range(len(scores_greater)):
+            if scores_greater[i][2] == scores_greater[0][2]:
+                searched_matches.append(scores_greater[i])
+    if len(results)//2 < 10:
+        searched_matches.append(results)
+    print(top_10_matches)
+    print(searched_matches)
+analysis(resultsss,71,3)
+#print(radix_sort(resultsss))
