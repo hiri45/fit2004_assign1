@@ -4,7 +4,7 @@ results = [['EAE', 'BCA', 85], ['EEE', 'BDB', 17], ['EAD', 'ECD', 21],
 ['ACE', 'DEE', 24], ['DDC', 'DCA', 61], ['CDE', 'BDE', 67],
 ['DED', 'EDD', 83], ['ABC', 'CAB', 54], ['AAB', 'BDB', 15],
 ['BBE', 'EAD', 28], ['ACD', 'DCD', 50], ['DEB', 'CAA', 21],
-['EBE', 'AAC', 24], ['EBD', 'BCD', 48]]
+['EBE', 'AAC', 24], ['EBD', 'BCD', 48],['EBD', 'BCD', 100]]
 
 """
 High level description about the function and the approach you
@@ -23,7 +23,7 @@ def counting_sort(list,place_value):
     output = [0]*length
 
     for i in range(0,length):
-        val = (list[i][2]//place_value)%10
+        val = (list[i][2]//place_value)%10 
         count[val] += 1
     for i in range(1,10):
         position[i] = position[i-1] + count[i-1]
