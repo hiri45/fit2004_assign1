@@ -1,7 +1,4 @@
 
-from abc import update_abstractmethods
-
-
 results = [['AAB', 'AAB', 35], ['AAB', 'BBA', 49], ['BAB', 'BAB', 42],
 ['AAA', 'AAA', 38], ['BAB', 'BAB', 36], ['BAB', 'BAB', 36],
 ['ABA', 'BBA', 57], ['BBB', 'BBA', 32], ['BBA', 'BBB', 49],
@@ -130,4 +127,4 @@ def analyze(results:list,score,roster):
     if len(updated_results)//2 < 10:
         searched_match.append(updated_results)
     return "{}\n{}".format(top_10_matches,searched_match)
-print(analyze(results,64,3))
+print(analyze(results,90,3))
