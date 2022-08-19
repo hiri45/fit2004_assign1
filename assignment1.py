@@ -23,7 +23,7 @@ def counting_sort(list,place_value):
     position = [0]*10
     output = [0]*length
     for i in range(0,length):
-        val = (list[i][2]//place_value)%10
+        val = (list[i][2]//place_value)%10 
         count[val] += 1
     for i in range(1,10):
         position[i] = position[i-1] + count[i-1]
