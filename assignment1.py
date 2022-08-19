@@ -114,7 +114,7 @@ Time complexity:
 Aux space complexity:  
     aux space complexity is O(NM)
 """
-def analyze(results:list,score,roster):
+def analyze(results, roster, score):
     # reverse result is created to implement the results in form [team2,team1,100-score]
     reverse_result = []
     for i in range(len(results)):
